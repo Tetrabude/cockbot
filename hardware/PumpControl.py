@@ -25,7 +25,8 @@ class PumpControl:
         self.thread.start()
 
     def join(self):
-        self.thread.join()
+        if self.thread is not None :
+            self.thread.join()
 
 class PumpThread (threading.Thread):
     def __init__(self, parent, timeWait):
