@@ -21,4 +21,4 @@ class PumpControl:
         
 
     def runPumpAsync(self, timeWait):
-        self.thread.start_new_thread(runPump, (timeWait, ))
+        thread.start_new_thread(self.runPump, (timeWait, ))
