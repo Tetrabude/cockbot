@@ -4,11 +4,11 @@ from PumpControl import PumpControl
 import time
 import RPi.GPIO as GPIO
 
-class PumpControlMock(PumpControl):
+class PumpControlPi(PumpControl):
     """Starts pump for time range"""
     
     def __init__(self, gpioId):
-        super(PumpControlMock,self).__init__(gpioId)
+        super(PumpControlPi,self).__init__(gpioId)
         GPIO.setup(gpioId, GPIO.OUT)
             
     def runPump(self, timeWait):
