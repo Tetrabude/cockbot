@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import thread
+import threading
 
 
 
@@ -21,4 +21,17 @@ class PumpControl:
         
 
     def runPumpAsync(self, timeWait):
-        thread.start_new_thread(self.runPump, (timeWait, ))
+        self.thread = PumpThread(self, timeWait)
+        self.thread.start()
+
+    def join(self):
+        self.thread.join()
+
+    class PumpThread (threading.Thread):
+        def __init__(self, parent, timeWait):
+            threading.Thread.__init__(self)
+            self.parent = parent
+            self.timeWait = timeWait
+        
+        def run(self):
+            parent.runPump(self.timeWait)
