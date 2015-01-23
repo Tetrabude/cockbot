@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-from multiprocessing import Pool
+import thread
 
 
 
@@ -22,4 +22,4 @@ class PumpControl:
         
 
     def runPumpAsync(self, timeWait):
-        self.pool.apply_async(runPump, timeWait)
+        self.thread.start_new_thread(runPump, (timeWait, ))
