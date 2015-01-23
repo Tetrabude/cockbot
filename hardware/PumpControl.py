@@ -11,8 +11,8 @@ class PumpControl:
     description = "Connects gpio slot to pump and activates pump for time range"
     author = "smeky, poschi"
     
-    def runPump(self, time):
-        GPIO.output(gpioId, 1)
-        time.sleep(time)
-        GPIO.output(gpioId, 0)
+    def runPump(self, timeWait):
+        GPIO.output(self.gpioId, 1)
+        time.sleep(timeWait)
+        GPIO.output(self.gpioId, 0)
         

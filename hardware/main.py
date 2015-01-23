@@ -1,9 +1,9 @@
-import Rpi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import PumpControl
 
 GPIO.setmode(GPIO.BCM)
 
-pumpA = PumpControl(25)
+pumpA = PumpControl.PumpControl(25)
 
 pumpA.runPump(5)
 
