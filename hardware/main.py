@@ -1,12 +1,13 @@
-import RPi.GPIO as GPIO
-import PumpControl
+#import RPi.GPIO as GPIO
+#from PumpControlPi import PumpControlPi as PumpControl
+from PumpControlMock import PumpControlMock as PumpControl
 import time
 
-GPIO.setmode(GPIO.BCM)
+#GPIO.setmode(GPIO.BCM)
 
-pumpYellow = PumpControl.PumpControl(25)
-pumpGreen = PumpControl.PumpControl(24)
-pumpBlue = PumpControl.PumpControl(23)
+pumpYellow = PumpControl(25)
+pumpGreen = PumpControl(24)
+pumpBlue = PumpControl(23)
 
 
 pumpYellow.runPumpAsync(5)
@@ -19,7 +20,7 @@ pumpBlue.join()
 pumpGreen.join()
 
 
-GPIO.cleanup()
+#GPIO.cleanup()
 
 
 

@@ -1,4 +1,6 @@
-import RPi.GPIO as GPIO
+from abc import ABCMeta, abstractmethod
+
+#import RPi.GPIO as GPIO
 import time
 import threading
 
@@ -6,19 +8,18 @@ import threading
 
 class PumpControl:
     """Starts pump for time range"""
+    __metaclass__ = ABCMeta
     
+    @abstractmethod
     def __init__(self, gpioId):
         self.gpioId = gpioId
-        GPIO.setup(gpioId, GPIO.OUT)
         self.thread = None
         
     description = "Connects gpio slot to pump and activates pump for time range"
     author = "smeky, poschi"
-    
-    def runPump(self, timeWait):
-        GPIO.output(self.gpioId, 1)
-        time.sleep(timeWait)
-        GPIO.output(self.gpioId, 0)
+
+    @abstractmethod
+    def runPump(self, timeWait): pass
         
 
     def runPumpAsync(self, timeWait):
