@@ -10,7 +10,6 @@ class PumpControl:
     def __init__(self, gpioId):
         self.gpioId = gpioId
         GPIO.setup(gpioId, GPIO.OUT)
-        self.pool = Pool()
         
     description = "Connects gpio slot to pump and activates pump for time range"
     author = "smeky, poschi"
