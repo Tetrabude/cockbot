@@ -27,11 +27,11 @@ class PumpControl:
     def join(self):
         self.thread.join()
 
-    class PumpThread (threading.Thread):
-        def __init__(self, parent, timeWait):
-            threading.Thread.__init__(self)
-            self.parent = parent
-            self.timeWait = timeWait
+class PumpThread (threading.Thread):
+    def __init__(self, parent, timeWait):
+        threading.Thread.__init__(self)
+        self.parent = parent
+        self.timeWait = timeWait
         
-        def run(self):
-            parent.runPump(self.timeWait)
+    def run(self):
+        parent.runPump(self.timeWait)
