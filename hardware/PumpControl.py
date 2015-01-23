@@ -34,4 +34,4 @@ class PumpThread (threading.Thread):
         self.timeWait = timeWait
         
     def run(self):
-        parent.runPump(self.timeWait)
+        self.parent.runPump(self.timeWait)
