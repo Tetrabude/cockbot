@@ -1,7 +1,5 @@
 from abc import ABCMeta, abstractmethod
 
-#import RPi.GPIO as GPIO
-import time
 import threading
 
 

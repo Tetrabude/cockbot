@@ -1,7 +1,6 @@
 #import RPi.GPIO as GPIO
 #from PumpControlPi import PumpControlPi as PumpControl
 from PumpControlMock import PumpControlMock as PumpControl
-import time
 
 #GPIO.setmode(GPIO.BCM)
 
