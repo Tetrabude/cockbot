@@ -13,3 +13,4 @@ class PumpControlMock(PumpControl):
         print "start: " + str(self.gpioId)
         time.sleep(timeWait)
         print "stop: " + str(self.gpioId)
+        return True

@@ -19,7 +19,6 @@ class PumpControl:
     @abstractmethod
     def runPump(self, timeWait): pass
         
-
     def runPumpAsync(self, timeWait):
         self.thread = PumpThread(self, timeWait)
         self.thread.start()
