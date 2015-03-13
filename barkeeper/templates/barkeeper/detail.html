@@ -1,0 +1,7 @@
+<h1>{{ recipe.name }}</h1>
+<br>
+{{ recipe.description }}
+<br><br>
+{% for ingredient in recipe.ingredient_set.all %}
+    <li>{{ ingredient.amount }} ml {{ ingredient.rawMaterial.name }}</li>
+{% endfor %}
