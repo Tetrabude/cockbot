@@ -26,7 +26,7 @@ class Ingredient(models.Model):
     rawMaterial = models.ForeignKey(RawMaterial)
     
     def __unicode__(self):
-        return self.name
+        return str(self.amount) + ' ml' + str(self.rawMaterial)
 
 
 
