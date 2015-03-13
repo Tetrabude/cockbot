@@ -1,8 +1,10 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.views import generic
 from barkeeper.models import Recipe
+
+from logic.Controller import Controller
 
 class IndexView(generic.ListView):
     template_name = 'barkeeper/index.html'
@@ -15,3 +17,6 @@ class DetailView(generic.DetailView):
     model = Recipe
     template_name = 'barkeeper/detail.html'
     
+def start(request, pk):
+    Controller(Recipe.objects.get(pk=pk))
+    return HttpResponse("Pumpen " + pk)
