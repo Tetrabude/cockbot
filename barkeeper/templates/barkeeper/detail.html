@@ -5,3 +5,6 @@
 {% for ingredient in recipe.ingredient_set.all %}
     <li>{{ ingredient.amount }} ml {{ ingredient.rawMaterial.name }}</li>
 {% endfor %}
+
+<br><br>
+<a href="{% url 'index' %}">Zur&uuml;ck zur &Uuml;bersicht</a>

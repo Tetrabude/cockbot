@@ -1,14 +1,17 @@
-from django.shortcuts import render, get_object_or_404
-
-from django.http import HttpResponse, Http404
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.views import generic
 from barkeeper.models import Recipe
 
-def index(request):
-    recipe_list = Recipe.objects.order_by('name')
-    context = {'recipe_list': recipe_list}
-    return render(request, 'barkeeper/index.html', context)
+class IndexView(generic.ListView):
+    template_name = 'barkeeper/index.html'
+    context_object_name = 'recipe_list'
+    
+    def get_queryset(self):
+        return Recipe.objects.order_by('name')
 
-def detail(request, recipe_id):
-    recipe = get_object_or_404(Recipe, pk=recipe_id)
-    return render(request, 'barkeeper/detail.html', {'recipe': recipe})
-
+class DetailView(generic.DetailView):
+    model = Recipe
+    template_name = 'barkeeper/detail.html'
+    
