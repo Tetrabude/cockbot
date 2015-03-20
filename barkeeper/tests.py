@@ -5,14 +5,22 @@ class barkeeperTests(TestCase):
      
     def setUp(self):
         pumpA = Pump.objects.create(name="PumpA", gpioId=5, mlPerMin=40.0)
+        pumpB = Pump.objects.create(name="PumpB", gpioId=7, mlPerMin=80.0)
+        
         
         orangeJuice = RawMaterial.objects.create(name="Orangensaft", pump=pumpA)
         coke = RawMaterial.objects.create(name="Cola")
+        rum = RawMaterial.objects.create(name="Rum", pump=pumpB)
         
         spezi = Recipe.objects.create(name="Spezi", description="Kalorienreduziert")
+        cubaLibre = Recipe.objects.create(name="Cuba Libre", description="Obama Spezial")
+        Recipe.objects.create(name="Cocktail Air", description="Vegan")
         
         Ingredient.objects.create(amount=150, recipe=spezi, rawMaterial=orangeJuice)
         Ingredient.objects.create(amount=150, recipe=spezi, rawMaterial=coke)
+        
+        Ingredient.objects.create(amount=50, recipe=cubaLibre, rawMaterial=rum)
+        Ingredient.objects.create(amount=150, recipe=cubaLibre, rawMaterial=orangeJuice)
 
     def testPumpCanBeAccessed(self):
         """Database Pump"""
@@ -40,7 +48,6 @@ class barkeeperTests(TestCase):
         self.assertEqual(str(rawMaterialCoke), unic, "Unicodemethod no pump not Correct")
         
         
-        
     def testRecipeCanBeAccessed(self):
         """Database Recipe"""
         recipe = Recipe.objects.get(name="Spezi")
@@ -49,6 +56,18 @@ class barkeeperTests(TestCase):
         self.assertEqual(recipe.description, "Kalorienreduziert", "Description of recipe not correct")
         
         self.assertEqual(str(recipe), recipe.name, "Unicodemethod not correct")
+        
+    def testRecipeIsPumpable(self):
+        """Database Recipe - IsPumpable"""
+        recipeSpezi = Recipe.objects.get(name="Spezi")
+        self.assertFalse(recipeSpezi.isPumpable(), "One Ingredient is not assigned to pump")
+        
+        recipeCubaLibre = Recipe.objects.get(name="Cuba Libre")
+        self.assertTrue(recipeCubaLibre.isPumpable(), "Should be pumpable")
+
+        recipeAir = Recipe.objects.get(name="Cocktail Air")
+        self.assertFalse(recipeAir.isPumpable(), "No Ingredients")
+
         
     def testIngredientCanBeAccessed(self): 
         """Database Ingredient"""
@@ -61,5 +80,6 @@ class barkeeperTests(TestCase):
         
         unic = str(ingredient[0].amount) + ' ml ' + str(ingredient[0].rawMaterial)
         self.assertEqual(str(ingredient[0]), unic, "Unicodemethod not correct")
+        
         
         

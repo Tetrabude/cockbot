@@ -22,6 +22,16 @@ class Recipe(models.Model):
     name = models.CharField(max_length=64)
     description = models.CharField(max_length=2048)
     
+    def isPumpable(self):
+        if len(self.ingredient_set.all()) <= 0:
+            return False
+        
+        for ingredient in self.ingredient_set.all():
+            if ingredient.rawMaterial.pump is None:
+                return False
+            
+        return True
+    
     def __unicode__(self):
         return self.name
     
