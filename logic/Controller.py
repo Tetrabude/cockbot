@@ -1,6 +1,4 @@
-from barkeeper.models import Recipe, Ingredient
-
- 
+from hardware.PumpControlMock import PumpControlMock as PumpControl
 
 class Controller:
 	def __init__(self, recipe):
@@ -12,8 +10,11 @@ class Controller:
 			pump = ingredient.rawMaterial.pump
 			
 			print str(pump)
-			print str(self.pumpDuration(ingredient.amount, pump.mlPerMin))
+			pumpDevice = PumpControl(pump.gpioId)
 			
+			duration = self.pumpDuration(ingredient.amount, pump.mlPerMin)
+			print str(duration)
+			pumpDevice.runPumpAsync(duration)
 	
 	def pumpDuration(self, amount, mlPerMin):
 		return amount * mlPerMin / 60
