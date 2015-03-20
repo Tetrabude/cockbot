@@ -6,7 +6,7 @@ class Pump(models.Model):
     mlPerMin =  models.FloatField(default=0.0)
     
     def __unicode__(self):
-        return self.name
+        return self.name + " " + str(self.gpioId) + " " + str(self.mlPerMin)
     
 class RawMaterial(models.Model):
     name = models.CharField(max_length=64)
