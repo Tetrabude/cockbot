@@ -13,7 +13,10 @@ class RawMaterial(models.Model):
     pump = models.OneToOneField(Pump, null=True, blank=True)
     
     def __unicode__(self):
-        return self.name
+        if self.pump is not None:   
+            return self.name + " (" + self.pump.name + ")"
+        else:
+            return self.name + " (keine Pumpe)"
     
 class Recipe(models.Model):
     name = models.CharField(max_length=64)
@@ -28,7 +31,7 @@ class Ingredient(models.Model):
     rawMaterial = models.ForeignKey(RawMaterial)
     
     def __unicode__(self):
-        return str(self.amount) + ' ml' + str(self.rawMaterial)
+        return str(self.amount) + ' ml ' + str(self.rawMaterial)
 
 
 
