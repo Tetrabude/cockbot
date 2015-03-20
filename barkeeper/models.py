@@ -2,7 +2,8 @@ from django.db import models
 
 class Pump(models.Model):
     name = models.CharField(max_length=64)
-    gpioId = models.IntegerField(default=0)  
+    gpioId = models.IntegerField(default=0) 
+    mlPerMin =  models.FloatField(default=0.0)
     
     def __unicode__(self):
         return self.name
