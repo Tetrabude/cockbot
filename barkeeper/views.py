@@ -18,6 +18,9 @@ class DetailView(generic.DetailView):
     template_name = 'barkeeper/detail.html'
     
 def start(request, pk):
-    recipe = Recipe.objects.get(pk=pk)    
-    Controller(recipe)
-    return HttpResponse("Pumpen " + pk)
+    recipe = Recipe.objects.get(pk=pk)  
+    try:  
+        Controller(recipe)
+        return HttpResponse("Pumpen " + pk)
+    except NameError as e:
+        return HttpResponse("Error: " + str(e))

@@ -4,6 +4,9 @@ class Controller:
 	def __init__(self, recipe):
 		print "Cocktail: " + recipe.name
 		
+		if not recipe.isPumpable():
+			raise NameError("Nicht alle Zutaten sind an Pumpen angeschlossen")
+		
 		for ingredient in recipe.ingredient_set.all() :
 			print str(ingredient)
 			
