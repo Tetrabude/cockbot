@@ -1,5 +1,6 @@
 from django.test import TestCase
-from barkeeper.models import Pump, RawMaterial, Recipe, Ingredient
+from barkeeper.models import Pump, RawMaterial, Recipe, Ingredient,\
+    ExtraIngredient
 
 class barkeeperTests(TestCase):
      
@@ -21,6 +22,9 @@ class barkeeperTests(TestCase):
         
         Ingredient.objects.create(amount=50, recipe=cubaLibre, rawMaterial=rum)
         Ingredient.objects.create(amount=150, recipe=cubaLibre, rawMaterial=orangeJuice)
+        
+        ExtraIngredient.objects.create(recipe=cubaLibre, amount="Stueck", rawMaterial="Eiswuerfel")
+        
 
     def testPumpCanBeAccessed(self):
         """Database Pump"""
