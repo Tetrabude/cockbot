@@ -11,6 +11,7 @@ class Pump(models.Model):
 class RawMaterial(models.Model):
     name = models.CharField(max_length=64)
     pump = models.OneToOneField(Pump, null=True, blank=True)
+    alcohol = models.BooleanField(default=True)
     
     def __unicode__(self):
         if self.pump is not None:   
@@ -20,7 +21,9 @@ class RawMaterial(models.Model):
     
 class Recipe(models.Model):
     name = models.CharField(max_length=64)
-    description = models.CharField(max_length=2048)
+    description = models.TextField(max_length=2048, default="")
+    instruction = models.TextField(max_length=2048, default="")
+    picture = models.URLField(max_length=256, default="")
     
     def isPumpable(self):
         if len(self.ingredient_set.all()) <= 0:
@@ -44,7 +47,13 @@ class Ingredient(models.Model):
         return str(self.amount) + ' ml ' + str(self.rawMaterial)
 
 
-
+class ExtraIngredient(models.Model):
+    amount = models.CharField(max_length=56)
+    recipe = models.ForeignKey(Recipe) 
+    rawMaterial = models.CharField(max_length=56)
+    
+    def __unicode__(self):
+        return str(self.amount) + ' ' + str(self.rawMaterial)
   
 
     
