@@ -5,7 +5,7 @@ class Pump(models.Model):
     gpioId = models.IntegerField(default=0) 
     mlPerMin =  models.FloatField(default=0.0)
     
-    def __unicode__(self):
+    def  __str__(self):
         return self.name + " " + str(self.gpioId) + " " + str(self.mlPerMin)
     
 class RawMaterial(models.Model):
@@ -13,7 +13,7 @@ class RawMaterial(models.Model):
     pump = models.OneToOneField(Pump, null=True, blank=True)
     alcohol = models.BooleanField(default=True)
     
-    def __unicode__(self):
+    def __str__(self):
         if self.pump is not None:   
             return self.name + " (" + self.pump.name + ")"
         else:
@@ -35,7 +35,7 @@ class Recipe(models.Model):
             
         return True
     
-    def __unicode__(self):
+    def __str__(self):
         return self.name
     
 class Ingredient(models.Model):
@@ -43,7 +43,7 @@ class Ingredient(models.Model):
     recipe = models.ForeignKey(Recipe) 
     rawMaterial = models.ForeignKey(RawMaterial)
     
-    def __unicode__(self):
+    def __str__(self):
         return str(self.amount) + ' ml ' + str(self.rawMaterial)
 
 
@@ -52,7 +52,7 @@ class ExtraIngredient(models.Model):
     recipe = models.ForeignKey(Recipe) 
     rawMaterial = models.CharField(max_length=56)
     
-    def __unicode__(self):
+    def __str__(self):
         return str(self.amount) + ' ' + str(self.rawMaterial)
   
 

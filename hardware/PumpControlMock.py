@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from PumpControl import PumpControl
-
+from hardware.PumpControl import PumpControl
 import time
 
 class PumpControlMock(PumpControl):
@@ -10,7 +9,7 @@ class PumpControlMock(PumpControl):
         super(PumpControlMock,self).__init__(gpioId)
             
     def runPump(self, timeWait):
-        print "start: " + str(self.gpioId)
+        print("start: " + str(self.gpioId))
         time.sleep(timeWait)
-        print "stop: " + str(self.gpioId)
+        print("stop: " + str(self.gpioId))
         return True
