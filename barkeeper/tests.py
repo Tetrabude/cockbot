@@ -23,7 +23,7 @@ class barkeeperTests(TestCase):
         Ingredient.objects.create(amount=50, recipe=cubaLibre, rawMaterial=rum)
         Ingredient.objects.create(amount=150, recipe=cubaLibre, rawMaterial=orangeJuice)
         
-        ExtraIngredient.objects.create(recipe=cubaLibre, amount="Stueck", rawMaterial="Eiswuerfel")
+        ExtraIngredient.objects.create(recipe=cubaLibre, amount="5 Stück", rawMaterial="Eiswürfel")
         
 
     def testPumpCanBeAccessed(self):
@@ -84,6 +84,14 @@ class barkeeperTests(TestCase):
         
         unic = str(ingredient[0].amount) + ' ml ' + str(ingredient[0].rawMaterial)
         self.assertEqual(str(ingredient[0]), unic, "Unicodemethod not correct")
+        
+    def testExtraIngredientCanBeAccessed(self):
+        """Database ExtraIngredient"""
+        recipe = Recipe.objects.get(name="Cuba Libre")
+        print(str(recipe))
+        extraIngredient = recipe.extraingredient_set.all() #.filter(rawMaterial="Bla")
+        
+        self.assertEqual(extraIngredient[0].amount, "5 Stück")
         
         
         
