@@ -1,14 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 <h1>{{ recipe.name }}</h1>
-<br>
+
+
+<div class="col_8">
+
+<h2>Beschreibung</h2>
+
 {{ recipe.description }}
-<br><br>
+
+
+</div>
+
+<div class="col_4">
+
+<h2>Inhalt</h2>
+<ul  class="alt">
 {% for ingredient in recipe.ingredient_set.all %}
     <li>{{ ingredient.amount }} ml {{ ingredient.rawMaterial.name }}</li>
 {% endfor %}
 
+</ul>
+</div>
 
-<br><br>
-<a href="{% url 'start' recipe.id %}">Cocktail mischen!</a>
+<div class="col_12">
+	<a href="{% url 'start' recipe.id %}"><button class="green">Cocktail mischen!</button></a>
+	<a href="{% url 'index' %}"><button>Zurück zur Übersicht</button></a>
+</div>
 
-<br><br>
-<a href="{% url 'index' %}">Zur&uuml;ck zur &Uuml;bersicht</a>
+
+{% endblock %}
