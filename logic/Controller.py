@@ -1,4 +1,9 @@
-from hardware.PumpControlPi import PumpControlPi as PumpControl
+try:
+	from hardware.PumpControlPi import PumpControlPi as PumpControl
+	print("Pi loaded")
+except ImportError:
+	from hardware.PumpControlMock import PumpControlMock as PumpControl
+	print("Mock loaded")
 
 class Controller:
 	def __init__(self, recipe):

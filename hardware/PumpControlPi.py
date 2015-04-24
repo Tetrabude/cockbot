@@ -2,7 +2,13 @@ from abc import ABCMeta, abstractmethod
 from hardware.PumpControl import PumpControl
 
 import time
-import RPi.GPIO as GPIO
+
+try:
+    import RPi.GPIO as GPIO
+except ImportError:
+    print("Problems with GPIO")
+    
+    
 
 class PumpControlPi(PumpControl):
     """Starts pump for time range"""
@@ -13,6 +19,6 @@ class PumpControlPi(PumpControl):
         GPIO.setup(gpioId, GPIO.OUT)
             
     def runPump(self, timeWait):
-       GPIO.output(self.gpioId, 1)
-       time.sleep(timeWait)
-       GPIO.output(self.gpioId, 0)
+        GPIO.output(self.gpioId, 1)
+        time.sleep(timeWait)
+        GPIO.output(self.gpioId, 0)
