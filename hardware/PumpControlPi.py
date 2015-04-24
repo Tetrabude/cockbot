@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from PumpControl import PumpControl
+from hardware.PumpControl import PumpControl
 
 import time
 import RPi.GPIO as GPIO
@@ -9,6 +9,7 @@ class PumpControlPi(PumpControl):
     
     def __init__(self, gpioId):
         super(PumpControlPi,self).__init__(gpioId)
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(gpioId, GPIO.OUT)
             
     def runPump(self, timeWait):

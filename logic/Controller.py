@@ -1,4 +1,4 @@
-from hardware.PumpControlMock import PumpControlMock as PumpControl
+from hardware.PumpControlPi import PumpControlPi as PumpControl
 
 class Controller:
 	def __init__(self, recipe):
