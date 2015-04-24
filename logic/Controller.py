@@ -1,4 +1,5 @@
 try:
+	import RPi.GPIO as GPIO
 	from hardware.PumpControlPi import PumpControlPi as PumpControl
 	print("Pi loaded")
 except ImportError:
