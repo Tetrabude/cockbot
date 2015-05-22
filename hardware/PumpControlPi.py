@@ -17,6 +17,7 @@ class PumpControlPi(PumpControl):
         super(PumpControlPi,self).__init__(gpioId)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(gpioId, GPIO.OUT)
+        GPIO.output(gpioId, 0)
             
     def runPump(self, timeWait):
         GPIO.output(self.gpioId, 1)
