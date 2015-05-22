@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ recipe.name }}...</h1>
+
+<h2>...wird zubereitet.</h2>
+
+<a href="{% url 'index' %}"><button>Nächsten Cocktail bestellen</button></a>
+
+{% endblock %}

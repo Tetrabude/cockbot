@@ -21,6 +21,8 @@ def start(request, pk):
     recipe = Recipe.objects.get(pk=pk)  
     try:  
         Controller(recipe)
-        return HttpResponse("Pumpen " + pk)
+        context = {'recipe': recipe}
+        return render(request, 'barkeeper/start.html', context)
+        #return HttpResponse("Pumpen " + pk)
     except NameError as e:
         return HttpResponse("Error: " + str(e))
