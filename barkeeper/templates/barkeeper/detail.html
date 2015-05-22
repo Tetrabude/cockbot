@@ -5,30 +5,31 @@
 <h1>{{ recipe.name }}</h1>
 
 
-<div class="col_8">
+<div class="col_5">
 
-<h2>Beschreibung</h2>
+	<h2>Beschreibung</h2>
 
-{{ recipe.description }}
+	{{ recipe.description }}
 
 
+	</div>
+
+<div class="col_3">
+	<h2>Inhalt</h2>
+	<ul  class="alt">
+	{% for ingredient in recipe.ingredient_set.all %}
+ 	   <li>{{ ingredient.amount }} ml {{ ingredient.rawMaterial.name }}</li>
+	{% endfor %}
+	</ul>
 </div>
 
 <div class="col_4">
-
-<h2>Inhalt</h2>
-<ul  class="alt">
-{% for ingredient in recipe.ingredient_set.all %}
-    <li>{{ ingredient.amount }} ml {{ ingredient.rawMaterial.name }}</li>
-{% endfor %}
-
-</ul>
-</div>
+	 <img class="detail_img" src="{{ recipe.picture }}">
+</div> 
 
 <div class="col_12">
-	<a href="{% url 'start' recipe.id %}"><button class="green">Cocktail mischen!</button></a>
-	<a href="{% url 'index' %}"><button>Zurück zur Übersicht</button></a>
+	<a href="{% url 'index' %}"><button class="large">Zurück zur Übersicht</button></a>
+	<a href="{% url 'start' recipe.id %}"><button class="large green">Cocktail mischen!</button></a>
 </div>
-
 
 {% endblock %}
