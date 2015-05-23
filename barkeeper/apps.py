@@ -15,7 +15,7 @@ class BarkeeperConfig(AppConfig):
         
     def ready(self):
         print("Ich bin voll ready!")
-        self.resetAllPumps()
+        #self.resetAllPumps()
             
     def resetAllPumps(self):
         print("Resetting pumps:")

@@ -16,14 +16,20 @@ class Controller:
 		for ingredient in recipe.ingredient_set.all() :
 			print(str(ingredient))
 			
-			pump = ingredient.rawMaterial.pump
+			pumps = ingredient.rawMaterial.pump_set.all()
 			
-			print(str(pump))
-			pumpDevice = PumpControl(pump.gpioId)
+			totalMlPerMin = 0.0
+			for pump in pumps:
+				print(str(pump.mlPerMin))
+				totalMlPerMin += pump.mlPerMin
+			 
+			duration = self.pumpDuration(ingredient.amount, totalMlPerMin)
 			
-			duration = self.pumpDuration(ingredient.amount, pump.mlPerMin)
-			print(str(duration))
-			pumpDevice.runPumpAsync(duration)
+			print(str(ingredient.amount) + " " + str(totalMlPerMin) + " " + str(duration))
+			
+			for pump in pumps:
+				pumpDevice = PumpControl(pump.gpioId)
+				pumpDevice.runPumpAsync(duration)
 	
 	def pumpDuration(self, amount, mlPerMin):
-		return amount * mlPerMin / 60
+		return amount / mlPerMin * 60
