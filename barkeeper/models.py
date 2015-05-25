@@ -36,7 +36,7 @@ class Recipe(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField(max_length=2048, default="")
     instruction = models.TextField(max_length=2048, default="")
-    picture = models.URLField(max_length=256, default="")
+    picture = models.URLField(max_length=256, default="", null=True, blank=True)
     
     def isPumpable(self):
         if len(self.ingredient_set.all()) <= 0:
