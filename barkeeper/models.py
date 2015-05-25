@@ -26,7 +26,10 @@ class Pump(models.Model):
     rawMaterial = models.ForeignKey(RawMaterial, null=True, blank=True)
     
     def  __str__(self):
-        return self.name + " " + str(self.gpioId) + " " + str(self.mlPerMin)
+        base = self.name + ", GPIO " + str(self.gpioId) + ", " + str(self.mlPerMin) + " ml/min"
+        if(self.rawMaterial is not None):
+            base += ", " + self.rawMaterial.name
+        return base
 
 
 class Recipe(models.Model):
