@@ -15,11 +15,12 @@ class BarkeeperConfig(AppConfig):
         
     def ready(self):
         print("Ich bin voll ready!")
-        #self.resetAllPumps()
+        self.resetAllPumps()
             
     def resetAllPumps(self):
         print("Resetting pumps:")
         for pump in Pump.objects.all():
             print("Pump " + pump.name + " on GPIO " + str(pump.gpioId))
             tmp = PumpControl(pump.gpioId)
+            
             
