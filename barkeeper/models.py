@@ -46,6 +46,12 @@ class Recipe(models.Model):
         return False
     isAlcohol.boolean = True
     
+    def amount(self):
+        totalAmount = 0
+        for ingredient in self.ingredient_set.all():
+            totalAmount += ingredient.amount
+        return totalAmount
+    
     def __str__(self):
         return self.name
 
