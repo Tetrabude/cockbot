@@ -7,7 +7,6 @@ class RawMaterial(models.Model):
     alcohol = models.BooleanField(default=True)
     
     def __str__(self):
-        pumps = self.pump_set.all()
         return self.name
 
 
