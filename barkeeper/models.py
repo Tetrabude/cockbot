@@ -39,6 +39,13 @@ class Recipe(models.Model):
             
         return True
     
+    def isAlcohol(self):
+        for ingredient in self.ingredient_set.all():
+            if(ingredient.rawMaterial.alcohol):
+                return True
+        return False
+    isAlcohol.boolean = True
+    
     def __str__(self):
         return self.name
 

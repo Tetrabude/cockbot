@@ -17,7 +17,7 @@ class ExtraIngredienInline(admin.StackedInline):
 
 class RecipeAdmin(admin.ModelAdmin):
     inlines = [IngredienInline, ExtraIngredienInline]
-    list_display = ('name', 'rawMaterials')
+    list_display = ('name', 'isAlcohol', 'rawMaterials')
     
     def rawMaterials(self, obj):
         rawMaterialsNames = []
