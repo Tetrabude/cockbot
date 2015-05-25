@@ -34,7 +34,7 @@ class PumpInline(admin.StackedInline):
 
 class RawMaterialAdmin(admin.ModelAdmin):
     inlines = [PumpInline]
-    list_display = ('name', 'recipes', 'pumps')
+    list_display = ('name', 'alcohol', 'recipes', 'pumps')
 
     def recipes(self, obj):
         recipeNames = []
