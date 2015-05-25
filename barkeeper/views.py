@@ -20,8 +20,10 @@ class DetailView(generic.DetailView):
 def start(request, pk):
     recipe = Recipe.objects.get(pk=pk)  
     try:  
-        Controller(recipe)
-        context = {'recipe': recipe}
+        tmp = Controller(recipe)
+        duration = tmp.start()
+        
+        context = {'recipe': recipe, 'duration': duration}
         return render(request, 'barkeeper/start.html', context)
         #return HttpResponse("Pumpen " + pk)
     except NameError as e:

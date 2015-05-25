@@ -4,7 +4,7 @@
 
 <h1>{{ recipe.name }}...</h1>
 
-<h2>...wird zubereitet.</h2>
+<h2>...wird zubereitet und benötigt etwa {{ duration|floatformat:0 }} Sekunden.</h2>
 
 <a href="{% url 'index' %}"><button>Nächsten Cocktail bestellen</button></a>
 

@@ -8,12 +8,16 @@ except ImportError:
 
 class Controller:
 	def __init__(self, recipe):
-		print("Cocktail: " + recipe.name)
+		self.recipe = recipe
 		
-		if not recipe.isPumpable():
+	def start(self):
+		print("Cocktail: " + self.recipe.name)
+		if not self.recipe.isPumpable():
 			raise NameError("Nicht alle Zutaten sind an Pumpen angeschlossen")
 		
-		for ingredient in recipe.ingredient_set.all() :
+		maxDuration = 0
+		
+		for ingredient in self.recipe.ingredient_set.all() :
 			print(str(ingredient))
 			
 			pumps = ingredient.rawMaterial.pump_set.all()
@@ -22,14 +26,19 @@ class Controller:
 			for pump in pumps:
 				print(str(pump.mlPerMin))
 				totalMlPerMin += pump.mlPerMin
-			 
+			
 			duration = self.pumpDuration(ingredient.amount, totalMlPerMin)
+			
+			if(duration > maxDuration):
+				maxDuration = duration
 			
 			print(str(ingredient.amount) + " " + str(totalMlPerMin) + " " + str(duration))
 			
 			for pump in pumps:
 				pumpDevice = PumpControl(pump.gpioId)
 				pumpDevice.runPumpAsync(duration)
+			
+			return duration
 	
 	def pumpDuration(self, amount, mlPerMin):
 		return amount / mlPerMin * 60
