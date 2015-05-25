@@ -24,7 +24,9 @@
 </div>
 
 <div class="col_4">
-	 <img class="detail_img" src="{{ recipe.picture }}">
+	{% if recipe.picture %}
+	 	<img class="detail_img" src="{{ recipe.picture }}">
+	 {% endif %}
 </div> 
 
 <div class="col_12">
