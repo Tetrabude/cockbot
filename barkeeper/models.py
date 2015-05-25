@@ -8,15 +8,7 @@ class RawMaterial(models.Model):
     
     def __str__(self):
         pumps = self.pump_set.all()
-        returnString = self.name
-        if len(pumps) > 0:
-            returnString += ": "
-            for pump in pumps:
-                returnString += pump.name + " "
-            #return self.name + " (" + self.pump.name + ")"
-        else:
-            returnString += " (keine Pumpe)"
-        return returnString
+        return self.name
 
 
 class Pump(models.Model):
