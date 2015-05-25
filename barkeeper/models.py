@@ -25,8 +25,8 @@ class Pump(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=64)
-    description = models.TextField(max_length=2048, default="")
-    instruction = models.TextField(max_length=2048, default="")
+    description = models.TextField(max_length=2048, default="", null=True, blank=True)
+    instruction = models.TextField(max_length=2048, default="", null=True, blank=True)
     picture = models.URLField(max_length=256, default="", null=True, blank=True)
     
     def isPumpable(self):
