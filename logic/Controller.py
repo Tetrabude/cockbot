@@ -38,7 +38,7 @@ class Controller:
 				pumpDevice = PumpControl(pump.gpioId)
 				pumpDevice.runPumpAsync(duration)
 			
-			return duration
+		return maxDuration
 	
 	def pumpDuration(self, amount, mlPerMin):
 		return amount / mlPerMin * 60
