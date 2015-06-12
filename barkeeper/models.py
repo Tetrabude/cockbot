@@ -30,10 +30,13 @@ class Recipe(models.Model):
     picture = models.URLField(max_length=256, default="", null=True, blank=True)
     
     def isPumpable(self):
-        if len(self.ingredient_set.all()) <= 0:
+        
+        ingredients = self.ingredient_set.all()
+        
+        if len(ingredients) <= 0:
             return False
         
-        for ingredient in self.ingredient_set.all():
+        for ingredient in ingredients:
             if len(ingredient.rawMaterial.pump_set.all()) <= 0:
                 return False
             

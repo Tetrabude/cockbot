@@ -11,7 +11,7 @@ class IndexView(generic.ListView):
     context_object_name = 'recipe_list'
     
     def get_queryset(self):
-        return Recipe.objects.order_by('name')
+        return Recipe.objects.all().exclude(ingredient__rawMaterial__pump=None).order_by('name')
 
 class DetailView(generic.DetailView):
     model = Recipe

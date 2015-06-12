@@ -7,15 +7,13 @@
 {% if recipe_list %}
     <ul class="alt">
     {% for recipe in recipe_list %}
-    	{% if recipe.isPumpable %}
-	        <div class="col_2 index">
-	        <a href="{% url 'detail' recipe.id %}">
-	        	<button class="large green index">
-	        		{{ recipe.name }}
-	        	</button>
-	         </a>
-	        </div>
-		{% endif %}
+        <div class="col_2 index">
+        <a href="{% url 'detail' recipe.id %}">
+        	<button class="large green index">
+        		{{ recipe.name }}
+        	</button>
+         </a>
+        </div>
     {% endfor %}
     </ul>
 {% else %}
