@@ -7,13 +7,22 @@
 {% if recipe_list %}
     <ul class="alt">
     {% for recipe in recipe_list %}
-        <div class="col_2 index">
         <a href="{% url 'detail' recipe.id %}">
-        	<button class="large green index">
-        		{{ recipe.name }}
-        	</button>
-         </a>
-        </div>
+        	<div class="col_4 recipe">
+	
+	        	<div class="col_12 index">
+        	
+   		     		{{ recipe.name }}
+        	 	</div>
+        	 
+        	 	<div class="col_12 ingredients">	
+           			{% for ingredient in recipe.ingredient_set.all %}
+        				{{ ingredient.rawMaterial.name }} 
+        			{% endfor %}
+        		 </div> 	 
+    		</div> 
+    		
+    	</a>
     {% endfor %}
     </ul>
 {% else %}

@@ -1,8 +1,23 @@
 .index {
-	height: 150px;
-	width: 150px;
+	font-size: 120%; 
+}
+
+.ingredients {
+	font-size: 90%;
+	color: black;
+}
+
+.hr_small {
+	margin: 10px 0px;
+	
 }
 
 .detail_img {
 	border: solid green;
+}
+
+.recipe {
+	height: 115px;
+	border-top: 1px dotted #4D99E0;
+	background: #efefef
 }
