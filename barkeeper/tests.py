@@ -5,13 +5,15 @@ from barkeeper.models import Pump, RawMaterial, Recipe, Ingredient,\
 class barkeeperTests(TestCase):
      
     def setUp(self):
-        pumpA = Pump.objects.create(name="PumpA", gpioId=5, mlPerMin=40.0)
-        pumpB = Pump.objects.create(name="PumpB", gpioId=7, mlPerMin=80.0)
         
         
-        orangeJuice = RawMaterial.objects.create(name="Orangensaft", pump=pumpA)
+        orangeJuice = RawMaterial.objects.create(name="Orangensaft")
         coke = RawMaterial.objects.create(name="Cola")
-        rum = RawMaterial.objects.create(name="Rum", pump=pumpB)
+        rum = RawMaterial.objects.create(name="Rum")
+        
+        pumpA = Pump.objects.create(name="PumpA", gpioId=5, mlPerMin=40.0, rawMaterial=orangeJuice )
+        pumpB = Pump.objects.create(name="PumpB", gpioId=7, mlPerMin=80.0, rawMaterial=coke)
+        pumpC = Pump.objects.create(name="PumpC", gpioId=7, mlPerMin=60.0, rawMaterial=rum)
         
         spezi = Recipe.objects.create(name="Spezi", description="Kalorienreduziert")
         cubaLibre = Recipe.objects.create(name="Cuba Libre", description="Obama Spezial")
@@ -32,24 +34,12 @@ class barkeeperTests(TestCase):
         self.assertEqual(pumpA.name, "PumpA", "Name of pump not correct")
         self.assertEqual(pumpA.gpioId, 5, "GPIOID of pump not correct")
         self.assertEqual(pumpA.mlPerMin, 40.0, "Milliliter per Minute not correct")
-        
-        unic = pumpA.name + " " + str(pumpA.gpioId) + " " + str(pumpA.mlPerMin)
-        self.assertEqual(str(pumpA), unic, "Unicodemethod not Correct")
-        
+        self.assertEqual(pumpA.rawMaterial, RawMaterial.objects.get(name="Orangensaft"), "Wrong Raw Material");
+                
     def testRawMaterialCanBeAccessed(self):
         """Database RawMaterial"""
         rawMaterialOrange = RawMaterial.objects.get(name="Orangensaft")
         self.assertEqual(rawMaterialOrange.name, "Orangensaft", "Wrong Raw Material")
-        self.assertEqual(rawMaterialOrange.pump.name, "PumpA", "Wrong Pump")
-        
-        unic = rawMaterialOrange.name + " (" + rawMaterialOrange.pump.name + ")"
-        self.assertEqual(str(rawMaterialOrange), unic, "Unicodemethod with pump not Correct")
-        
-        rawMaterialCoke = RawMaterial.objects.get(name="Cola")
-        self.assertEqual(rawMaterialCoke.pump, None, "Pump should be Null")
-        
-        unic = rawMaterialCoke.name + " (keine Pumpe)"
-        self.assertEqual(str(rawMaterialCoke), unic, "Unicodemethod no pump not Correct")
         
         
     def testRecipeCanBeAccessed(self):
@@ -64,7 +54,7 @@ class barkeeperTests(TestCase):
     def testRecipeIsPumpable(self):
         """Database Recipe - IsPumpable"""
         recipeSpezi = Recipe.objects.get(name="Spezi")
-        self.assertFalse(recipeSpezi.isPumpable(), "One Ingredient is not assigned to pump")
+        self.assertTrue(recipeSpezi.isPumpable(), "One Ingredient is not assigned to pump")
         
         recipeCubaLibre = Recipe.objects.get(name="Cuba Libre")
         self.assertTrue(recipeCubaLibre.isPumpable(), "Should be pumpable")
