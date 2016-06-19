@@ -82,3 +82,29 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'cockformat': {
+            'format': '%(asctime)s;%(message)s'
+        },
+    },
+    'handlers': {
+        'cockfile': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'cocklog.log',
+            'formatter': 'cockformat'
+        },
+    },
+    'loggers': {
+        'drinkinglog': {
+            'handlers': ['cockfile'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

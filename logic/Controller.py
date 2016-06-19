@@ -6,12 +6,17 @@ except ImportError:
 	from hardware.PumpControlMock import PumpControlMock as PumpControl
 	print("Mock loaded")
 
+import logging
+
+drinkinglog = logging.getLogger('drinkinglog')
+
 class Controller:
 	def __init__(self, recipe):
 		self.recipe = recipe
 		
 	def start(self):
 		print("Cocktail: " + self.recipe.name)
+		drinkinglog.info(self.recipe.name)
 		if not self.recipe.isPumpable():
 			raise NameError("Nicht alle Zutaten sind an Pumpen angeschlossen")
 		
