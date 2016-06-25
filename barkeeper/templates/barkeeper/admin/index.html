@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Pumpen zur Auswahl</h1>
+
+{% if pump_list %}
+	
+	<form action="{% url 'clean' %}" method="post">
+	{% csrf_token %}
+	<label for="duration">Duration</label>
+	<input id="duration" name="duration" type="text" value="10" />
+	
+	<table cellspacing="0" cellpadding="0" class="sortable">
+	<thead><tr>
+		<th>Name</th>
+		<th>GPIO</th>
+		<th>RawMaterial</th>
+		<th>Action</th>
+	</tr></thead>
+	<tbody>
+
+
+	    {% for pump in pump_list %}
+	    
+		    <tr>
+				<td>{{ pump.name }}</td>
+				<td>{{ pump.gpioId }}</td>
+				<td>{{pump.rawMaterial.name}}</td>
+				<td><button type="submit" name="pump" value="{{ pump.id }}" class="small">Clean</button></td>
+			</tr>
+	     
+	    {% endfor %}
+	</tbody>
+	</table>
+	</form>
+{% else %}
+    <p>Keine Pumpen vorhanden.</p>
+{% endif %}
+
+{% endblock %}
