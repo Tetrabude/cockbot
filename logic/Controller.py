@@ -22,6 +22,17 @@ class Controller:
 		
 		maxDuration = 0
 		
+		recipeAmount = self.recipe.amount()
+		
+		maxAmount = 200.0
+		amountFactor = 1.0
+		
+		if recipeAmount > maxAmount:
+			amountFactor = maxAmount / recipeAmount 
+			
+		print(str(maxAmount) + " " + str(recipeAmount) + " " + str(amountFactor))
+			
+		
 		for ingredient in self.recipe.ingredient_set.all() :
 			print(str(ingredient))
 			
@@ -32,12 +43,12 @@ class Controller:
 				print(str(pump.mlPerMin))
 				totalMlPerMin += pump.mlPerMin
 			
-			duration = self.pumpDuration(ingredient.amount, totalMlPerMin)
+			duration = self.pumpDuration(ingredient.amount * amountFactor, totalMlPerMin)
 			
 			if(duration > maxDuration):
 				maxDuration = duration
 			
-			print(str(ingredient.amount) + " " + str(totalMlPerMin) + " " + str(duration))
+			print("Amount: " + str(ingredient.amount) + " AmountMitFaktor " + str(ingredient.amount * amountFactor) + " " + str(totalMlPerMin) + " " + str(duration))
 			
 			for pump in pumps:
 				pumpDevice = PumpControl(pump.gpioId)
