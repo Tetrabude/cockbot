@@ -1,6 +1,6 @@
 # CockBot
 
-User can brew cocktails via website. Raspberry Pi controls peristaltic pumps via transistor via via GPIOs.  
+User can brew cocktails via website. Raspberry Pi controls peristaltic pumps via transistor via GPIOs.  
 
 ## Hardware
 
